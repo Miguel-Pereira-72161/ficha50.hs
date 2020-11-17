@@ -45,3 +45,35 @@ zip' (h:t) (h1:t1) = [(h,h1)] ++ zip' t t1
 
 elemInList :: Eq a => a -> [a] -> Bool
 elemInList _ [] = False
+elemInList a (h:t)
+  | a == h = True
+  | otherwise = elemInList a t
+
+replicateElem :: Int -> a -> [a]
+replicateElem 0 _ = []
+replicateElem n h = h : replicateElem (n-1) h
+
+betweenElem :: a -> [a] -> [a]
+betweenElem _ [] = []
+betweenElem _ (x:[]) = [x]
+betweenElem n (h:t) = h : n : betweenElem n t
+
+groupElems :: Eq a => [a] -> [[a]]
+groupElems [] = []
+groupElems (h:t) = group_acc [h] h t
+  where 
+    group_acc rep c [] = [rep]
+    group_acc rep c (y:ys)
+      | c == y = group_acc (rep ++ [y]) c ys
+      | otherwise = rep : group_acc [y] y ys
+
+concat' :: [[a]] -> [a]
+concat' [[]] = []
+concat' (h:t) = h ++ concat' t 
+
+inits' :: [a] -> [[a]]
+inits' [] = []
+inits' (h:t) = inits_acc [] h t 
+  where 
+    inits_acc rep c [] = [rep]
+    inits_acc rep c (a:as) = rep : inits_acc [c] a as
