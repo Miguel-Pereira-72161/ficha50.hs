@@ -78,3 +78,10 @@ inits' (h:t) = inits_acc [] h t
   where 
     inits_acc rep c [] = [rep]
     inits_acc rep c (a:as) = rep : inits_acc [c] a as
+
+tails' :: [a] -> [[a]]
+tails' [] = []
+tails' (h:t) = tails_acc (h:t) t
+  where  
+    tails_acc rep [] = [rep,[]]
+    tails_acc rep (u:us) = rep : tails_acc (tail rep) us
