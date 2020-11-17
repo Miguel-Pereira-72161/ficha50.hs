@@ -69,6 +69,7 @@ groupElems (h:t) = group_acc [h] h t
 
 concat' :: [[a]] -> [a]
 concat' [[]] = []
+concat' [(x:[])] = [x]
 concat' (h:t) = h ++ concat' t 
 
 inits' :: [a] -> [[a]]
