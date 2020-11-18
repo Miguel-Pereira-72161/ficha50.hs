@@ -123,3 +123,16 @@ delete' _ [] = []
 delete' n (h:t)
   | n == h = t
   | otherwise = h : delete' n t
+
+removeElems :: Eq a => [a] -> [a] -> [a]
+removeElems lis [] = lis
+removeElems (x:xs) (h:hs)
+  | x == h = removeElems xs hs
+  | otherwise = x : removeElems xs (h:hs)
+
+union' :: Eq a => [a] -> [a] -> [a]
+union' [] l = l
+union' lis [] = lis
+union' (h:t) (a:y)
+  | h == a = union' (h:t) y
+  | otherwise = h : union' t (a:y)
