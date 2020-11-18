@@ -118,6 +118,17 @@ elemIndices' n (h:t) = elem_acc 0 n h t
       | ele == c = cont : elem_acc (cont+1) ele y ys
       | otherwise = elem_acc (cont+1) ele y ys
 
+nubAux' :: Eq a => a -> [a] -> [a]
+nubAux' _ [] = []
+nubAux' n (x1:xs)
+  | n == x1 = nubAux' n xs
+  | otherwise = x1 : nubAux' n xs
+
+nub' :: Eq a => [a] -> [a]
+nub' [] = [] 
+nub' (x:[]) = [x] 
+nub' (x1:x2:xs) = x1 : (nubAux' x1 (nub'(x2:xs)))
+
 delete' :: Eq a => a -> [a] -> [a]
 delete' _ [] = []
 delete' n (h:t)
