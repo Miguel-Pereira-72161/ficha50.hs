@@ -85,3 +85,35 @@ tails' (h:t) = tails_acc (h:t) t
   where  
     tails_acc rep [] = [rep,[]]
     tails_acc rep (u:us) = rep : tails_acc (tail rep) us
+
+isPrefixOf' :: Eq a => [a] -> [a] -> Bool
+isPrefixOf' [] lis = True
+isPrefixOf' l [] = False
+isPrefixOf' (h:t) (x:xs)
+  | h == x = isPrefixOf' t xs
+  | otherwise = False 
+
+isSuffixOf' :: Eq a => [a] -> [a] -> Bool
+isSuffixOf' [] lis = False 
+isSuffixOf' l [] = True 
+isSuffixOf' (h:t) (x:xs)
+  | h /= x = isSuffixOf' (h:t) xs
+  | otherwise = False
+
+isSubsequenceOf' :: Eq a => [a] -> [a] -> Bool 
+isSubsequenceOf' [] lis = True
+isSubsequenceOf' l [] = False
+isSubsequenceOf' (h:t) (a:as)
+  | h == a = isSubsequenceOf' t as
+  | otherwise = isSubsequenceOf' (h:t) as
+
+elemIndices' :: Eq a => a -> [a] -> [Int]
+elemIndices' _ [] = error "list with no elements"
+elemIndices' n (h:t) = elem_acc 0 n h t
+  where 
+    elem_acc cont ele c []
+      | ele == c = [cont]
+      | otherwise = []
+    elem_acc cont ele c (y:ys)
+      | ele == c = cont : elem_acc (cont+1) ele y ys
+      | otherwise = elem_acc (cont+1) ele y ys
