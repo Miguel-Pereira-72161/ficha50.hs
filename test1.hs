@@ -117,3 +117,9 @@ elemIndices' n (h:t) = elem_acc 0 n h t
     elem_acc cont ele c (y:ys)
       | ele == c = cont : elem_acc (cont+1) ele y ys
       | otherwise = elem_acc (cont+1) ele y ys
+
+delete' :: Eq a => a -> [a] -> [a]
+delete' _ [] = []
+delete' n (h:t)
+  | n == h = t
+  | otherwise = h : delete' n t
