@@ -136,3 +136,39 @@ union' lis [] = lis
 union' (h:t) (a:y)
   | h == a = union' (h:t) y
   | otherwise = h : union' t (a:y)
+
+intersect' :: Eq a => [a] -> [a] -> [a]
+intersect' [] l = []
+intersect' lis [] = lis 
+intersect' (x1:xs) (y1:ys)
+  | x1 == y1 = x1 : intersect' xs (y1:ys)
+  | otherwise = intersect' xs ys
+
+insert' :: Ord a => a -> [a] -> [a]
+insert' d [] = [d]
+insert' d (x1:xs)
+  | d > x1 = x1 : insert' d xs
+  | otherwise = d : insert' x1 xs
+
+unwords' :: [String] -> String
+unwords' [] = ""
+unwords' (x:[]) = x 
+unwords' (x1:xs) = x1 ++ " " ++ unwords' xs
+
+unlines' :: [String] -> String
+unlines' [] = ""
+unlines' (x:[]) = x 
+unlines' (x1:xs) = x1 ++ "\n" ++ unlines' xs
+
+majorAux :: Ord a => [a] -> a
+majorAux [] = error "no elements"
+majorAux (x:[]) = x
+majorAux (x1:x2:xs)
+  | x1 < x2 = majorAux (x2:xs)
+  | otherwise = majorAux (x1:xs)
+
+posMajor :: Ord a => [a] -> Int
+posMajor [] = error "no elements"
+posMajor (x:xs) 
+  | x < (majorAux (x:xs)) = 1 + posMajor xs
+  | otherwise = 0
