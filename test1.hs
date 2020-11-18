@@ -74,10 +74,10 @@ concat' (h:t) = h ++ concat' t
 
 inits' :: [a] -> [[a]]
 inits' [] = []
-inits' (h:t) = inits_acc [] h t 
+inits' (h:t) = inits_acc [] (h:t)
   where 
-    inits_acc rep c [] = [rep]
-    inits_acc rep c (a:as) = rep : inits_acc [c] a as
+    inits_acc rep [] = [rep]
+    inits_acc rep (y:ys) = rep : inits_acc (rep ++ [y]) ys 
 
 tails' :: [a] -> [[a]]
 tails' [] = []
