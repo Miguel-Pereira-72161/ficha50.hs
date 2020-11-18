@@ -172,3 +172,15 @@ posMajor [] = error "no elements"
 posMajor (x:xs) 
   | x < (majorAux (x:xs)) = 1 + posMajor xs
   | otherwise = 0
+  
+repetidosAux :: Eq a => a -> [a] -> Bool
+repetidosAux _ [] = False
+repetidosAux n (x1:xs)
+  | n == x1 = True
+  | otherwise = repetidosAux n xs 
+
+temRepetidos :: Eq a => [a] -> Bool
+temRepetidos [] = False
+temRepetidos (x1:x2:t) = if ((repetidosAux x1 (x2:t)) == False)
+                         then (repetidosAux x2 t)
+                         else True 
