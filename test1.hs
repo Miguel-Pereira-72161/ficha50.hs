@@ -184,3 +184,14 @@ temRepetidos [] = False
 temRepetidos (x1:x2:t) = if ((repetidosAux x1 (x2:t)) == False)
                          then (repetidosAux x2 t)
                          else True 
+                         
+isDigit' :: Char -> Bool
+isDigit' x
+  | x >= '0' && x <= '9' = True
+  | otherwise = False
+
+algarismos :: [Char] -> [Char]
+algarismos [] = []
+algarismos (h:t)
+  | isDigit' h == True = h : algarismos t
+  | otherwise = algarismos t
