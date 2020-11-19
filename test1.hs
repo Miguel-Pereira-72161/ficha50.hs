@@ -290,3 +290,17 @@ elemMSet' c [] = False
 elemMSet' c (x:xs)
   | c == (fst x) = True
   | otherwise = elemMSet' c xs
+
+-- vamos criar uma nova Data Movimento
+data Movimento = Norte | Sul | Este | Oeste
+
+vertical ::  [Movimento] -> Bool
+vertical [] = False
+vertical (h:[]) = case h of
+  Norte -> True
+  Sul -> True
+  _ -> False
+vertical (h:t) = case h of
+  Norte -> vertical t
+  Sul -> vertical t
+  _ -> False 
