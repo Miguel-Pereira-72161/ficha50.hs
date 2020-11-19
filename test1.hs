@@ -219,14 +219,13 @@ repetidosAux n (x1:xs)
   | n == x1 = True
   | otherwise = repetidosAux n xs 
 
---30
 temRepetidos :: Eq a => [a] -> Bool
 temRepetidos [] = False
 temRepetidos (x1:x2:t) = if ((repetidosAux x1 (x2:t)) == False)
                          then (repetidosAux x2 t)
                          else True 
  
- --31
+ --30
 isDigit' :: Char -> Bool
 isDigit' x
   | x >= '0' && x <= '9' = True
@@ -238,30 +237,31 @@ algarismos (h:t)
   | isDigit' h == True = h : algarismos t
   | otherwise = algarismos t
 
+-- Auxiliar para 31 e 32
 calPos :: Int -> [a] -> a
 calPos 0 (h:t) = h
 calPos n (h:t) = calPos (n-1) t 
 
---32
+--31
 posImpares :: [a] -> [a]
 posImpares [] = []
 posImpares (x:[]) = []
 posImpares (x1:xs) = (calPos 1 (x1:xs)) : posImpares (tail xs)
 
---33
+--32
 posPares :: [a] -> [a]
 posPares [] = []
 posPares (x:[]) = [x]
 posPares (x1:xs) = (calPos 0 (x1:xs)) : posPares (tail xs)
 
---34
+--33
 isSorted' :: Ord a => [a] -> Bool
 isSorted' [] = True
 isSorted' (x1:x2:xs)
   | x1 < x2 = isSorted' (x2:xs)
   | otherwise = False
 
---35
+--34
 {- Definido em cima - fiz novamente para treino (outra maneira)
 insert'' :: Ord a => a -> [a] -> [a]
 insert'' n [] = [n]
@@ -273,7 +273,7 @@ iSort' :: Ord a => [a] -> [a]
 iSort' [] = []
 iSort' (x1:xs) = (insert' x1 (iSort' xs))
 
---36
+--35
 menor :: String -> String -> Bool
 menor l [] = False
 menor [] lis = True
@@ -284,7 +284,7 @@ menor (a:as) (h:hs)
 -- vamos criar um novo tipo Conjuntos
 type Conjunto a = [(a,Int)]
 
---37
+--36
 elemMSet' :: Eq a => a -> [(a,Int)] -> Bool
 elemMSet' c [] = False
 elemMSet' c (x:xs)
