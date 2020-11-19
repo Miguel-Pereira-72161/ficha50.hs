@@ -206,3 +206,50 @@ algarismos [] = []
 algarismos (h:t)
   | isDigit' h == True = h : algarismos t
   | otherwise = algarismos t
+
+calPos :: Int -> [a] -> a
+calPos 0 (h:t) = h
+calPos n (h:t) = calPos (n-1) t 
+
+posImpares :: [a] -> [a]
+posImpares [] = []
+posImpares (x:[]) = []
+posImpares (x1:xs) = (calPos 1 (x1:xs)) : posImpares (tail xs)
+
+posPares :: [a] -> [a]
+posPares [] = []
+posPares (x:[]) = [x]
+posPares (x1:xs) = (calPos 0 (x1:xs)) : posPares (tail xs)
+
+isSorted' :: Ord a => [a] -> Bool
+isSorted' [] = True
+isSorted' (x1:x2:xs)
+  | x1 < x2 = isSorted' (x2:xs)
+  | otherwise = False
+  
+{- Definido em cima - fiz novamente para treino (outra maneira)
+insert'' :: Ord a => a -> [a] -> [a]
+insert'' n [] = [n]
+insert'' n (x:xs)
+  | n < x = n : (x:xs)
+  | otherwise = x : insert'' n xs -}
+
+iSort' :: Ord a => [a] -> [a]
+iSort' [] = []
+iSort' (x1:xs) = (insert' x1 (iSort' xs))
+
+menor :: String -> String -> Bool
+menor l [] = False
+menor [] lis = True
+menor (a:as) (h:hs)
+  | a <= h = menor as hs
+  | otherwise = False 
+
+-- vamos criar um novo tipo Conjuntos
+type Conjunto a = [(a,Int)]
+
+elemMSet' :: Eq a => a -> [(a,Int)] -> Bool
+elemMSet' c [] = False
+elemMSet' c (x:xs)
+  | c == (fst x) = True
+  | otherwise = elemMSet' c xs
